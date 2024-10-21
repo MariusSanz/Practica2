@@ -37,7 +37,6 @@ void InitData()
 void PrintVect(float vect[], int from, int numel)
 {
     int nombre = N;
-    from -= 1;
     for (int i = 0; i < numel; i++)
     {
         if (from >= nombre || from < 0)
@@ -54,11 +53,30 @@ void PrintVect(float vect[], int from, int numel)
     printf("\n");
 }
 
+// Problema 2
+void PrintRow(float mat[N][N], int row, int from, int numel)
+{
+    // Verifica que 'row' i 'from' estan dins dels límits
+    if (row >= 0 && row < N && from >= 0 && from + numel <= N)
+    {
+        for (int i = 0; i < numel; i++)
+        {
+            printf("%f ", mat[row][from]);
+            from += 1;
+        }
+        printf("\n");
+    }
+    else
+    {
+        printf("Error, posicio no disponible\n");
+    }
+}
+
 int main()
 {
     InitData();
 
-    int from = 5;
+    int from = 0;
     int numel = 4;
 
     printf("Elements de V1:\n");
@@ -69,4 +87,11 @@ int main()
 
     printf("Elements de V3:\n");
     PrintVect(V3, from, numel);
+
+    int row = 1;
+    int from2 = 0;
+    int numel2 = 10;
+
+    printf("Elements de Mat:\n");
+    PrintRow(Mat, row, from2, numel2);
 }
