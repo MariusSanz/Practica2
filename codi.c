@@ -53,7 +53,7 @@ else{
 //Problema 3
 void  MultEscalar( float vect[N], float vectres[N], float alfa ){
 
-for(int i=0; i<=N; i++){
+for(int i=0; i<N; i++){
 	vectres[i]=vect[i]*alfa;
 }
 }
@@ -61,7 +61,7 @@ for(int i=0; i<=N; i++){
 //Problema 4
 float Scalar( float vect1[N], float vect2[N] ){
 float x=0;
-for (int i=0; i<=N; i++){
+for (int i=0; i<N; i++){
 	x=x+(vect1[i]*vect2[i]);
 }
 printf("%f\n",x);
@@ -70,7 +70,7 @@ printf("%f\n",x);
 //Problema 5
 float Magnitude( float vect[N] ){
 float x=0;
-for(int i=0; i<=N; i++){
+for(int i=0; i<N; i++){
 	x=x+(vect[i]*vect[i]);
 }
 x=sqrt(x);
@@ -81,7 +81,7 @@ printf("%f\n",x);
 int Ortogonal( float vect1[N], float vect2[N] ){
 float x=0;
 int y=0;
-for (int i=0; i<=N; i++){
+for (int i=0; i<N; i++){
         x=x+(vect1[i]*vect2[i]);
 }
 if (x==0){
@@ -97,32 +97,40 @@ void  Projection( float vect1[N], float vect2[N], float vectres[N] ){
 float numerador=0;
 float denominador=0;
 float denominador1=0;
-float fracció=0;
+float fraccio=0;
 float x=0;
-for (int i=0; i<=N; i++){
+for (int i=0; i<N; i++){
         numerador=numerador+(vect1[i]*vect2[i]);
 }
-for(int i=0; i<=N; i++){
+for(int i=0; i<N; i++){
         x=x+(vect2[i]*vect2[i]);
 }
 denominador=sqrt(x);
 if (denominador==0){
 	printf("Error");
 }else{
-	fracció=(numerador/denominador);
+	fraccio=(numerador/denominador);
 }
-for(int i=0; i<=N; i++){
-        vectres[i]=vect2[i]*fracció;
+for(int i=0; i<N; i++){
+        vectres[i]=vect2[i]*fraccio;
 }
 }
 
 //Problema 8
 float Infininorm( float M[N][N] ){
-float x=0
-int i=j
-for (int i=0, i<=N, i++){
-	if M[i][j]
-
+float x=0;
+float suma=0;
+for (int i=0; i<N; i++){
+	for (int j=0; j<N; j++){
+		suma+=fabs(M[i][j]);
+	}
+	if (x<suma){
+		x=suma;
+	}
+	suma=0;
+}
+return x;
+}
 
 
 
@@ -144,6 +152,11 @@ printf("Comprovació C:\n");
 PrintRow(MatDD, 0, 0, 10);
 PrintRow(MatDD, 100, 95, 10);
 
+printf("Comprovació D:\n");
+printf("%f\n",Infininorm(Mat));
+printf("%f\n",Infininorm(MatDD));
+
+
 printf("Comprovació E:\n");
 Scalar(V1,V2);
 Scalar(V1,V3);
@@ -160,13 +173,11 @@ if(Ortogonal(V1,V2)==1){
 }if (Ortogonal(V1,V2)==0){
 	printf("V1 i V2 no són ortogonals\n");
 }
-printf("Comprovació G:\n");
 if(Ortogonal(V1,V3)==1){
         printf("V1 i V3 són ortogonals\n");
 }if (Ortogonal(V1,V3)==0){
         printf("V1 i V3 no són ortogonals\n");
 }
-printf("Comprovació G:\n");
 if(Ortogonal(V2,V3)==1){
         printf("V2 i V3 són ortogonals\n");
 }if (Ortogonal(V2,V3)==0){
