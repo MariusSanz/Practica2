@@ -26,7 +26,7 @@ for( i = 0; i < N; i++ ){
 
 //Problema 1
 void PrintVect( float vect[N], int from, int numel ) { 
-if(from<=N && numel<=N-from){
+if(from<N && numel<=N-from){
 	for (int i=from; i < numel+from; i++) {
 		printf("%f ", vect[i]);
 }
@@ -133,6 +133,72 @@ return x;
 }
 
 
+//Problema 9
+float Onenorm( float M[N][N] ){
+float x=0;
+float suma=0;
+for (int j=0; j<N; j++){
+        for (int i=0; i<N; i++){
+                suma+=fabs(M[i][j]);
+        }
+        if (x<suma){
+                x=suma;
+        }
+        suma=0;
+}
+return x;
+}
+
+//Problema 10
+float NormFrobenius(float M[N][N])
+{
+    float sumatori = 0;
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+            sumatori += (M[i][j]) * (M[i][j]);
+    }
+    float final = sqrt(sumatori);
+    return final;
+}
+
+//Problema 11
+int DiagonalDom( float M[N][N] )
+{
+    float final=0;
+    float diagonal=0;
+    float sumatori = 0;
+    for (int i = 0; i < N; i++){
+        diagonal=fabs(M[i][i]);
+	for (int j = 0; j < N; j++)
+            sumatori += fabs(M[i][j]);
+    sumatori=sumatori-diagonal;
+    if (sumatori<=diagonal){
+	final = 1; 
+    }
+    else{
+	final=0;
+    }
+    sumatori=0;
+    }
+    return final;
+}
+
+
+//Problema 12
+void Matriu_x_Vector( float M[N][N], float vect[N], float vectres[N] ){
+float final=0;
+float sumatori=0;
+for (int i=0; i<N; i++){
+	sumatori=0;
+	for (int j=0; j<N; j++){
+		sumatori+=(M[i][j]);
+		
+	}
+final=sumatori*vect[i];
+vectres[i]=final;
+}
+}
 
 int main(){
 InitData();
@@ -153,9 +219,28 @@ PrintRow(MatDD, 0, 0, 10);
 PrintRow(MatDD, 100, 95, 10);
 
 printf("Comprovació D:\n");
+printf("Infininorma:\n");
 printf("%f\n",Infininorm(Mat));
 printf("%f\n",Infininorm(MatDD));
-
+printf("Norma ú:\n");
+printf("%f\n",Onenorm(Mat));
+printf("%f\n",Onenorm(MatDD));
+printf("Frobenius:\n");
+printf("%f\n",NormFrobenius(Mat));
+printf("%f\n",NormFrobenius(MatDD));
+printf("Diagonal dominant:\n");
+if (DiagonalDom(Mat)==0){
+	printf("Mat no és diagonal dominant\n");
+}
+if (DiagonalDom(Mat)==1){
+	printf("Mat és diagonal dominant\n");
+}
+if (DiagonalDom(MatDD)==0){
+        printf("MatDD no és diagonal dominant\n");
+}
+if (DiagonalDom(MatDD)==1){
+        printf("MatDD és diagonal dominant\n");
+}
 
 printf("Comprovació E:\n");
 Scalar(V1,V2);
@@ -196,6 +281,12 @@ Projection(V2,V3,Vres1);
 PrintVect(Vres1,0,10);
 Projection(V1,V2,Vres1);
 PrintVect(Vres1,0,10);
-return 0;
+
+printf("Comprovació J:\n");
+float Vres2[N];
+Matriu_x_Vector(Mat,V2,Vres2);
+PrintVect(Vres2,0,10);
+
+
 }
 
