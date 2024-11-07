@@ -186,19 +186,48 @@ int DiagonalDom( float M[N][N] )
 
 
 //Problema 12
-void Matriu_x_Vector( float M[N][N], float vect[N], float vectres[N] ){
-float final=0;
-float sumatori=0;
-for (int i=0; i<N; i++){
-	sumatori=0;
-	for (int j=0; j<N; j++){
-		sumatori+=(M[i][j]);
-		
+void Matriu_x_Vector(float M[N][N], float vect[N], float vectres[N]){
+    for (int i = 0; i < N; i++){
+        float sumatori = 0;
+        for (int j = 0; j < N; j++){
+            float matriu = M[i][j];
+            float vector = vect[j];
+            sumatori += matriu * vector;
+            vectres[i] = sumatori;
+        }
+    }
+}
+
+//Problema 13
+int Jacobi( float M[N][N] , float vect[N], float vectres[N], unsigned iter ){
+	if (DiagonalDom(M)==0){
+		return 0;
 	}
-final=sumatori*vect[i];
-vectres[i]=final;
+	else if (DiagonalDom(M)==1){
+		float vectx[N];
+		for (int i=0; i<N; i++) {
+                        vectx[i]=vect[i];
+                }
+		for (unsigned a=0; a<iter; a++){
+			for (int i=0; i<N; i++){
+				float suma=0;
+				for(int j=0; j<N; j++){
+					if (j!=i){
+						suma+=M[i][j]*vectx[j];
+					}
+				}
+				vectres[i]=(vect[i]-suma)/M[i][i];
+			}
+			for (int i=0; i<N; i++){
+				vectx[i]=vectres[i];
+			}
+		}
+
+		return 1;
+	}
 }
-}
+
+
 
 int main(){
 InitData();
@@ -288,5 +317,12 @@ Matriu_x_Vector(Mat,V2,Vres2);
 PrintVect(Vres2,0,10);
 
 
-}
+printf("Comprovació K:\n");
+float Vres3[N];
+Jacobi(MatDD,V3,Vres3,1);
+PrintVect(Vres3,0,10);
 
+float Vres4[N];
+Jacobi(MatDD,V3,Vres4,1000);
+PrintVect(Vres4,0,10);
+}
