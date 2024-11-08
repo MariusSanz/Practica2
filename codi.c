@@ -28,7 +28,7 @@ for( i = 0; i < N; i++ ){
 void PrintVect( float vect[N], int from, int numel ) { 
 if(from<N && numel<=N-from){
 	for (int i=from; i<numel+from; i++) {
-		printf("%f", vect[i]);
+		printf("%f ", vect[i]);
 }
 	printf("\n");
 }
