@@ -27,8 +27,8 @@ for( i = 0; i < N; i++ ){
 //Problema 1
 void PrintVect( float vect[N], int from, int numel ) { 
 if(from<N && numel<=N-from){
-	for (int i=from; i < numel+from; i++) {
-		printf("%f ", vect[i]);
+	for (int i=from; i<numel+from; i++) {
+		printf("%f", vect[i]);
 }
 	printf("\n");
 }
@@ -49,10 +49,8 @@ else{
 	printf("Error\n");
 }
 }
- 
 //Problema 3
 void  MultEscalar( float vect[N], float vectres[N], float alfa ){
-
 for(int i=0; i<N; i++){
 	vectres[i]=vect[i]*alfa;
 }
@@ -64,7 +62,7 @@ float x=0;
 for (int i=0; i<N; i++){
 	x=x+(vect1[i]*vect2[i]);
 }
-printf("%f\n",x);
+return x;
 }
 
 //Problema 5
@@ -74,7 +72,7 @@ for(int i=0; i<N; i++){
 	x=x+(vect[i]*vect[i]);
 }
 x=sqrt(x);
-printf("%f\n",x);
+return x;
 }
 
 //Problema 6
@@ -96,13 +94,10 @@ return y;
 void  Projection( float vect1[N], float vect2[N], float vectres[N] ){
 float numerador=0;
 float denominador=0;
-float denominador1=0;
 float fraccio=0;
 float x=0;
 for (int i=0; i<N; i++){
         numerador=numerador+(vect1[i]*vect2[i]);
-}
-for(int i=0; i<N; i++){
         x=x+(vect2[i]*vect2[i]);
 }
 denominador=sqrt(x);
@@ -152,13 +147,13 @@ return x;
 //Problema 10
 float NormFrobenius(float M[N][N])
 {
-    float sumatori = 0;
-    for (int i = 0; i < N; i++)
+    float sumatori=0;
+    for (int i=0; i<N; i++)
     {
-        for (int j = 0; j < N; j++)
-            sumatori += (M[i][j]) * (M[i][j]);
+        for (int j=0; j<N; j++)
+            sumatori+=(M[i][j])*(M[i][j]);
     }
-    float final = sqrt(sumatori);
+    float final=sqrt(sumatori);
     return final;
 }
 
@@ -174,7 +169,7 @@ int DiagonalDom( float M[N][N] )
             sumatori += fabs(M[i][j]);
     sumatori=sumatori-diagonal;
     if (sumatori<=diagonal){
-	final = 1; 
+	final = 1;
     }
     else{
 	final=0;
@@ -273,14 +268,14 @@ if (DiagonalDom(MatDD)==1){
 }
 
 printf("Comprovació E:\n");
-Scalar(V1,V2);
-Scalar(V1,V3);
-Scalar(V2,V3);
+printf("%f\n",Scalar(V1,V2));
+printf("%f\n",Scalar(V1,V3));
+printf("%f\n",Scalar(V2,V3));
 
 printf("Comprovació F:\n");
-Magnitude(V1);
-Magnitude(V2);
-Magnitude(V3);
+printf("%f\n",Magnitude(V1));
+printf("%f\n",Magnitude(V2));
+printf("%f\n",Magnitude(V3));
 
 printf("Comprovació G:\n");
 if(Ortogonal(V1,V2)==1){
