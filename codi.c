@@ -160,18 +160,15 @@ float NormFrobenius(float M[N][N])
 //Problema 11
 int DiagonalDom( float M[N][N] )
 {
-    float final=0;
+    float final=1;
     float diagonal=0;
     float sumatori = 0;
-    for (int i = 0; i < N; i++){
+    for (int i=0; i<N; i++){
         diagonal=fabs(M[i][i]);
-	for (int j = 0; j < N; j++)
+	for (int j=0; j<N; j++)
             sumatori += fabs(M[i][j]);
     sumatori=sumatori-diagonal;
-    if (sumatori<=diagonal){
-	final = 1;
-    }
-    else{
+    if (sumatori>diagonal){
 	final=0;
     }
     sumatori=0;
